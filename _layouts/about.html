@@ -56,13 +56,13 @@ layout: default
           <!--Education-->
           {% if page.education -%}
              <h2>Education</h2>
-             {%- include education.html %}
+             {%- include education.html limit=true%}
           {%- endif %}
 
            <!--Achievements and Certifications-->
           {% if page.education -%}
              <h2>Achievements and Certifications</h2>
-             {%- include ach_cer.html %}
+             {%- include ach_cer.html limit=true%}
           {%- endif %}
               
           <!-- Selected papers -->
