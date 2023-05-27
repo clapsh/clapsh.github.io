@@ -1,9 +1,9 @@
 github_users:
   - torvalds
-  - alshedivat
+  - clapsh
 
 github_repos:
-  - alshedivat/al-folio
+  - clapsh/clapsh.github.io
   - twbs/bootstrap
   - jekyll/jekyll
   - jquery/jquery
