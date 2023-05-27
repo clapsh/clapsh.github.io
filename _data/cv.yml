@@ -15,12 +15,13 @@
       institution: SKKU, South Korea
       year: 2020~
       description:
-        - Description 1. Third year student 
-        - Description 2.
-        - title: Description 3.
+        - Description 1. Major in Computer Science and Engineering
+        - Description 2. Third year student 
+        - title: Description 3. The course taken until now
           contents:
-            - Sub-description 1.
-            - Sub-description 2.
+            - Sub-description 1. operating system
+            - Sub-description 2. computer network
+            - Sub-description 3. open source software practice
   
 
 - title: Experience
@@ -47,13 +48,11 @@
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 1921
+    - year: 
       items: 
-        - Nobel Prize in Physics 
-        - Matteucci Medal
-    - year: 2029
-      items: 
-        - Max Planck Medal
+        -  
+       
+   
 
 - title: Academic Interests
   type: nested_list
