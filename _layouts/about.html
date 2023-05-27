@@ -56,7 +56,7 @@ layout: default
           <!--Education-->
           {% if page.education -%}
              <h2>Education</h2>
-             
+             {%- include education.html limit=true%}
           {%- endif %}
 
            <!--Achievements and Certifications-->
