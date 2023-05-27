@@ -1,12 +1,5 @@
 github_users:
-  - torvalds
   - clapsh
 
 github_repos:
   - clapsh/clapsh.github.io
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
