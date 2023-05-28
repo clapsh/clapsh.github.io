@@ -11,27 +11,27 @@ on: # workflow를 발생시키는 이벤트
       - main
   workflow_dispatch: # workflow를 수동으로 실행하기 위한 이벤트 (여기에서는 정의되지 않음)
 
-permissions: # GITHUB-TOKEN에서 설정한 기본 permission을 변경 
-  contents: write # read/write -> write로 변경 ?
+permissions:        # GITHUB-TOKEN에서 설정한 기본 permission을 변경 
+  contents: write   # read/write(기본 permission) -> write로 변경
 
 jobs:                        # workflow의 주요 component 정의 
-  deploy:                    # 배포를 만들 때 실행할 workflow?
+  deploy:                    # 배포를 만들 때 실행할 workflow
     runs-on: ubuntu-latest   # ubuntu-latest에서 실행 
     steps:                   # 일련의 task
-    - name: Checkout 🛎️      # task 이름 :  Checkout 🛎️
+    - name: Checkout 🛎️        # task 이름 :  Checkout 🛎️
       uses: actions/checkout@v3 # actions/checkout@v3에서 정의된 action 실행 
-    - name: Setup Ruby          # task 이름:  Setup Ruby
+    - name: Setup Ruby          # task 이름:  Setup Ruby 
       uses: ruby/setup-ruby@v1 # ruby/setup-ruby@v1에서 정의된 action 실행
-      with:                     # 호출된 workflow에 input으로 전달
+      with:                     # 호출된 workflow에 input으로 전달할 것
         ruby-version: '3.2.1'   # ruby-version 설정
-        bundler-cache: true     # bundle-install을 실행하고 설치된 gem을 cache에 저장?(caches)
-    - name: Install and Build 🔧
-      run: |
-        npm install -g mermaid.cli
-        bundle exec jekyll build
-    - name: Deploy 🚀
-      if: github.event_name != 'pull_request'
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: _site
+        bundler-cache: true     # bundle-install을 실행하고 설치된 gem을 cache에 저장
+    - name: Install and Build 🔧  # task 이름: Install and Build
+      run: |                        # command line 실행 
+        npm install -g mermaid.cli # mermaid CLI 설치
+        bundle exec jekyll build   # ruby환경을 Gemfile안의 gems에서만 사용하기 위한 커맨드
+    - name: Deploy 🚀                               # task이름 :  Deploy 🚀
+      if: github.event_name != 'pull_request'       # 조건문 : github.event_name이 'pull_request'가 아닌 경우
+      uses: JamesIves/github-pages-deploy-action@v4 # JamesIves/github-pages-deploy-action@v4 에서 정의된 action 실행 
+      with:                                         
+        folder: _site                               # action이 deploy되는 폴더명 
 
