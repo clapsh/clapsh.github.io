@@ -1,30 +1,30 @@
-name: deploy
+name: deploy # workflow의 이름 : deploy
 
-on:
-  push:
+on: # workflow를 발생시키는 이벤트 
+  push: # master 또는 main branch에서 push가 발생할 때
     branches:
       - master
       - main
-  pull_request:
+  pull_request: #  master 또는 main branch에서 pull_request가 발생할 때
     branches:
       - master
       - main
-  workflow_dispatch:
+  workflow_dispatch: # workflow를 수동으로 실행하기 위한 이벤트 (여기에서는 정의되지 않음)
 
-permissions:
-  contents: write
+permissions: # GITHUB-TOKEN에서 설정한 기본 permission을 변경 
+  contents: write # read/write -> write로 변경 ?
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v3
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2.1'
-        bundler-cache: true
+jobs:                        # workflow의 주요 component 정의 
+  deploy:                    # 배포를 만들 때 실행할 workflow?
+    runs-on: ubuntu-latest   # ubuntu-latest에서 실행 
+    steps:                   # 일련의 task
+    - name: Checkout 🛎️      # task 이름 :  Checkout 🛎️
+      uses: actions/checkout@v3 # actions/checkout@v3에서 정의된 action 실행 
+    - name: Setup Ruby          # task 이름:  Setup Ruby
+      uses: ruby/setup-ruby@v1 # ruby/setup-ruby@v1에서 정의된 action 실행
+      with:                     # 호출된 workflow에 input으로 전달
+        ruby-version: '3.2.1'   # ruby-version 설정
+        bundler-cache: true     # bundle-install을 실행하고 설치된 gem을 cache에 저장?(caches)
     - name: Install and Build 🔧
       run: |
         npm install -g mermaid.cli
