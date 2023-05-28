@@ -1,31 +1,32 @@
-name: Docker Image CI
+name: Docker Image CI # workflow 이름 :  Docker Image CI
 
-on:
-  push:
+on:                   # workflow를 발생시키는 이벤트
+  push:                # master branch 에서 push할 때
     branches: [ master ]
 
-jobs: 
+jobs:     # workflow의 내용 
 
-  build:
+  build:  # 빌드할 때 실행할 workflow 
+ 
+    runs-on: ubuntu-latest #  ubuntu-latest에서 실행 (runner)
+    if: github.repository_owner == 'alshedivat' # github.repository_owner확인 
+    #(본 과제에서는 docker를 이용해서 setup하지 않았으므로 owner을 'clapsh'로 설정하지 않았음 )
 
-    runs-on: ubuntu-latest
-    if: github.repository_owner == 'alshedivat'
+    steps: # 일련의 tasks
+    - name: Checkout            # task이름 : Checkout
+      uses: actions/checkout@v3 # actions/checkout@v3에서 정의된 action 실행
+    - name: Buildx                          # task이름 :Buildx
+      uses: docker/setup-buildx-action@v1 # docker/setup-buildx-action@v1에서 정의된 action 실행
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Login
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
+    - name: Login                      # task이름 :Login 
+      uses: docker/login-action@v1      #docker/login-action@v1 에서 정의된 action 실행
+      with:                         # secrets.DOCKER_USERNAME과 secrets.DOCKER_PASSWORD을 호출된 workflow에 전달
+        username: ${{ secrets.DOCKER_USERNAME }}    
         password: ${{ secrets.DOCKER_PASSWORD }}
          
-    - name: Build and push
-      uses: docker/build-push-action@v2
-      with:
+    - name: Build and push              # task이름 : Build and push  
+      uses: docker/build-push-action@v2 # docker/build-push-action@v2에서 정의된 action 실행
+      with:                             # 호출된 workflow에 input으로 전달할 것
         context: .
         push: true
         tags: amirpourmand/al-folio
